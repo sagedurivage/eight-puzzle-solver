@@ -22,6 +22,7 @@ class Node
     Node * getParent() const;               // access parent node of node
     int getCost() const;                    // access path cost to node
     int getHeur() const;                    // access heuristic of node
+    void printState() const;                // print orientation of numbers
 };
 
 #endif

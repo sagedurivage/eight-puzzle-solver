@@ -17,3 +17,24 @@ int Node::getCost() const { return cost; }
 
 int Node::getHeur() const { return heur; }
 
+void Node::printState() const
+{
+    // print out state of puzzle in a 3x3 format
+    for (size_t i = 0; i < (state.size() / 3); ++i)     // rows
+    {
+        for (size_t j = 0; j < (state.size() / 3); ++j) // columns
+        {
+            if (state[i] == 0)
+            {
+                cout << "b ";
+            }
+            else
+            {
+                cout << state[i] << " ";
+            }
+        }
+        cout << endl;   // next row
+    }
+    cout << endl;       // end with newline
+}
+
