@@ -10,7 +10,7 @@ Solver::Solver(const vector<int> & init, const vector<int> & goal)
 
 /* rap stars (functions) in my spotify wrapped (program) */
 
-void Solver::uCostSearch() { aStar(Heuristics::uniformCost); }
+void Solver::uCostSearch() { aStar(Heuristic::uniformCost); }
 
 void Solver::aStarMis() { aStar(Heuristic::misplacedTile); }
 

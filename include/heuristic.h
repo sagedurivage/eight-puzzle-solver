@@ -16,5 +16,5 @@ class Heuristic
     static int euclideanDist(const Node & node, const Puzzle & puzzle);
 };
 
-#indif
+#endif
 
