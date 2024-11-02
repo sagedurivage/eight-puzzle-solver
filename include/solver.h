@@ -21,6 +21,8 @@ class Solver
     // -> Heuristic::uniformCost()
     // -> Heuristic::misplacedTile()
     // -> Heuristic::euclideanDist()
+
+    void trace(Node * goalNode);
     
   public:
     // constructinator

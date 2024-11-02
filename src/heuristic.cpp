@@ -2,6 +2,8 @@
 #include "../include/heuristic.h"
 #include <cmath>
 
+using namespace std;
+
 // Uniform Cost is A* with heuristic of zero (from project outline note)
 int Heuristic::uniformCost(const Node & node, const Puzzle & puzzle) { return 0; }
 

@@ -79,16 +79,16 @@ int main()
     // instantiate solver
     Solver solutionist(initialPuzzle, solution);
 
-    userInput = algoChoice();
-    if (userInput == 1)
+    usrInput = algoChoice();
+    if (usrInput == 1)
     {
         solutionist.uCostSearch();
     }
-    else if (userInput == 2)
+    else if (usrInput == 2)
     {
         solutionist.aStarMis();
     }
-    else if (userInput == 3)
+    else if (usrInput == 3)
     {
         solutionist.aStarEuc();
     }
