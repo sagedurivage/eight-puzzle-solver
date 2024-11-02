@@ -51,7 +51,24 @@ void Solver::trace(Node * goal)
     cout << endl << "To solve this problem the search algorithm expanded a total of" << endl;
     cout << solutionPath.size() << " nodes." << endl;
     cout << "The maximum number of nodes in the queue at any one time: " << maxQueueSize << "." << endl;
-    cout << "The depth of the goal node was " << solutionPath.size() - 1 << endl;
+    cout << "The depth of the goal node was " << solutionPath.size() - 1 << "." << endl;
+}
+
+void Solver::attemptTrace(Node * failure)
+{
+    vector<Node *> attemptPath;
+
+    // get sequence of nodes up to the initial state through parents
+    for (Node * curr = failure; curr != nullptr; curr = curr->getParent())
+    {
+        attemptPath.push_back(curr);
+    }
+
+    cout << endl << "Impossible to solve." << endl;
+    cout << "In its attempt to solve this problem the search algorithm expanded a total of" << endl;
+    cout << attemptPath.size() << " nodes." << endl;
+    cout << "The maximum number of nodes in the queue at any one time: " << maxQueueSize << "." << endl;
+    cout << "The depth of the failure node was " << attemptPath.size() - 1 << "." << endl;
 }
 
 // need some functionality to compare nodes in the queue
@@ -70,7 +87,7 @@ struct NodeComparison
 // syntax source: https://www.geeksforgeeks.org/cpp-for-loop/# (range-based)
 void Solver::aStar(int (*heuristic)(const Node &, const Puzzle &))
 {
-    // thanks for the quiz question about optimal ordering of nodes to explore for efficiency
+    // there was a good quiz question about optimal ordering of nodes to expand efficiently
     priority_queue<Node *, vector<Node *>, NodeComparison> frontier;
     // maintain explored states
     set<vector<int>> repeats;
@@ -79,6 +96,7 @@ void Solver::aStar(int (*heuristic)(const Node &, const Puzzle &))
     Node * startNode = new Node(puzzle.getInitial(), nullptr, 0, heuristic(puzzle.getInitial(), puzzle));
     frontier.push(startNode);
 
+    Node * curr = nullptr;
     while (!frontier.empty())
     {
         // keep track of maximum queue size for trace
@@ -87,7 +105,7 @@ void Solver::aStar(int (*heuristic)(const Node &, const Puzzle &))
             maxQueueSize = frontier.size();
         }
 
-        Node * curr = frontier.top();
+        curr = frontier.top();
         frontier.pop();
 
         // check if puzzle is solved
@@ -115,6 +133,6 @@ void Solver::aStar(int (*heuristic)(const Node &, const Puzzle &))
     }
 
     // if no goal state reached in the while loop
-    cout << "Impossible to solve." << endl;
+    attemptTrace(curr);
 }
 

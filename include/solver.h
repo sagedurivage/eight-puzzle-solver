@@ -24,6 +24,7 @@ class Solver
     // -> Heuristic::euclideanDist()
 
     void trace(Node * goalNode);
+    void attemptTrace(Node * goalNode);
     
   public:
     // constructinator

@@ -9,8 +9,6 @@ Puzzle::Puzzle(const vector<int> & init, const vector<int> & goal)
 {
 }
 
-
-
 /* funky definitions */
 
 const vector<int> & Puzzle::getInitial() const { return init; }
