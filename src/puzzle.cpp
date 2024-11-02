@@ -36,22 +36,22 @@ vector<vector<int>> Puzzle::getLineage(const vector<int> & state) const
     // up down left right A B A B
     const vector<pair<int, int>> bMoves = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
 
-    for (const auto & [rowMove, colMove] : bMoves)
+    for (const auto & move : bMoves)
     {
-        int nRow = bRow + rowMove;
-        int nCol = bCol + colMove;
+        int nRow = bRow + move.first;
+        int nCol = bCol + move.second;
 
         // check blank isn't on some 'edge' or 'corner'
         if (nRow >= 0 && nRow < 3 && nCol >= 0 && nCol < 3)
         {
-            int nIndex = (nRow * 3) + newCol;
+            int nIndex = (nRow * 3) + nCol;
 
             // build a new state for a legal move
             vector<int> offspring = state;
             // swap elements at respective indices
             int tmp = offspring[bIndex];
-            offSpring[bIndex] = offspring[nIndex];
-            offSpring[nIndex] = tmp;
+            offspring[bIndex] = offspring[nIndex];
+            offspring[nIndex] = tmp;
 
             // include new state is list of possible successors
             lineage.push_back(offspring);

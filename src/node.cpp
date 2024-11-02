@@ -27,13 +27,13 @@ void Node::printState() const
     {
         for (size_t j = 0; j < (state.size() / 3); ++j) // columns
         {
-            if (state[i] == 0)
+            if (state[(i * 3) + j] == 0)
             {
                 cout << "b ";
             }
             else
             {
-                cout << state[i] << " ";
+                cout << state[(i * 3) + j] << " ";
             }
         }
         cout << endl;   // next row

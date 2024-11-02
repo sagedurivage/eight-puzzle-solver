@@ -3,7 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include <queue>
-#include <unordered_sets>
+#include <set>
 
 using namespace std;
 
@@ -36,9 +36,8 @@ void Solver::trace(Node * goal)
     reverse(solutionPath.begin(), solutionPath.end());
 
     // output trace
-    cout << "Expanding state" << endl;
+    cout << endl << "Expanding state" << endl;
     solutionPath[0]->printState();
-    cout << endl;
     // iterate through each node in the vector
     for (size_t i = 1; i < (solutionPath.size() - 1); ++i)
     {
@@ -51,7 +50,7 @@ void Solver::trace(Node * goal)
     cout << endl << endl << "Goal!!!" << endl;
     cout << endl << "To solve this problem the search algorithm expanded a total of" << endl;
     cout << solutionPath.size() << " nodes." << endl;
-    cout << "The maximum number of nodes in the queue at any one time: " << "FIXME." << endl;
+    cout << "The maximum number of nodes in the queue at any one time: " << maxQueueSize << "." << endl;
     cout << "The depth of the goal node was " << solutionPath.size() - 1 << endl;
 }
 
@@ -61,19 +60,20 @@ struct NodeComparison
 {
     bool operator()(const Node * ln, const Node * rn) const
     {
-        return (ln->getCost() + ln->getHeur) > (rn->getCost() + rn->getHeur);   // > for min-heap
+        return (ln->getCost() + ln->getHeur()) > (rn->getCost() + rn->getHeur());   // > for min-heap
     }
 };
 
 // A* search algorithm
 // syntax source: https://www.geeksforgeeks.org/priority-queue-in-cpp-stl/#
 // syntax source: https://www.geeksforgeeks.org/unordered_set-in-cpp-stl/
+// syntax source: https://www.geeksforgeeks.org/cpp-for-loop/# (range-based)
 void Solver::aStar(int (*heuristic)(const Node &, const Puzzle &))
 {
     // thanks for the quiz question about optimal ordering of nodes to explore for efficiency
     priority_queue<Node *, vector<Node *>, NodeComparison> frontier;
     // maintain explored states
-    unordered_set<vector<int>> repeats;
+    set<vector<int>> repeats;
 
     // create a node for the initial state of the puzzle & push to queue
     Node * startNode = new Node(puzzle.getInitial(), nullptr, 0, heuristic(puzzle.getInitial(), puzzle));
@@ -100,9 +100,21 @@ void Solver::aStar(int (*heuristic)(const Node &, const Puzzle &))
         // current state is NOT solution -> add to explored set
         repeats.insert(curr->getState());
 
-        // expand nodes
-        // FIXME need to implement a child exploration function in Puzzle
+        // iterate through possible successive states
+        for (const auto & nState : puzzle.getLineage(curr->getState()))
+        {
+            // check if state is a repeat; skip following, if so
+            if (repeats.find(nState) != repeats.end()) continue;
+
+            // build a valid state its very own node! wow!
+            Node * child = new Node(nState, curr, (curr->getCost() + 1), heuristic(nState, puzzle));
+
+            // PUT THAT CHILD ON THE FRONT LINES!!!
+            frontier.push(child);
+        }
     }
 
+    // if no goal state reached in the while loop
+    cout << "Impossible to solve." << endl;
 }
 

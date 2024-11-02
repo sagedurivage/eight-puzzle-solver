@@ -33,6 +33,7 @@ vector<int> getPuzzle()
     cin >> puzzle[3] >> puzzle[4] >> puzzle[5];
     cout << "Enter the third row, use space or tabs between numbers ";
     cin >> puzzle[6] >> puzzle[7] >> puzzle[8];
+    cout << endl;
 
     return puzzle;
 }
@@ -40,10 +41,10 @@ vector<int> getPuzzle()
 // get user's choice of search algorithm
 int algoChoice()
 {
-    cout << endl << "Enter your choice of algorithm" << endl;
+    cout << "Enter your choice of algorithm" << endl;
     cout << "Uniform Cost Search" << endl;
     cout << "A* with the Misplaced Tile heuristic." << endl;
-    cout << "A* with the Euclidean distance heuristic." << endl;
+    cout << "A* with the Euclidean distance heuristic." << endl << endl;
 
     int input = 0;
     cin >> input;
