@@ -67,13 +67,13 @@ int main()
     vector<int> initialPuzzle(9, 0);
     if (usrInput == 1)
     {
-        // initialPuzzle = {1, 2, 3, 4, 8, 0, 7, 6, 5};    // default puzzle
+        initialPuzzle = {1, 2, 3, 4, 8, 0, 7, 6, 5};    // default puzzle
         // initialPuzzle = {1, 2, 3, 4, 5, 6, 7, 8, 0};    // trivial (0)
         // initialPuzzle = {1, 2, 3, 4, 5, 6, 7, 0, 8};    // very easy (1)
         // initialPuzzle = {1, 2, 0, 4, 5, 3, 7, 8, 6};    // easy (2)
         // initialPuzzle = {0, 1, 2, 4, 5, 3, 7, 8, 6};    // doable (3)
         // initialPuzzle = {8, 7, 1, 6, 0, 2, 5, 4, 3};    // oh boy (4)
-        initialPuzzle = {1, 2, 3, 4, 5, 6, 8, 7, 0};    // impossible (5)
+        // initialPuzzle = {1, 2, 3, 4, 5, 6, 8, 7, 0};    // impossible (5)
     }
     else
     {
