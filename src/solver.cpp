@@ -2,6 +2,8 @@
 #include "../include/solver.h"
 #include <iostream>
 #include <algorithm>
+#include <queue>
+#include <unordered_sets>
 
 using namespace std;
 
@@ -54,13 +56,53 @@ void Solver::trace(Node * goal)
 }
 
 // need some functionality to compare nodes in the queue
-
-// looking into syntax of priority queue
-// syntax source: https://www.geeksforgeeks.org/priority-queue-in-cpp-stl/#
+// syntax source: https://www.geeksforgeeks.org/custom-comparator-in-priority_queue-in-cpp-stl/#
+struct NodeComparison
+{
+    bool operator()(const Node * ln, const Node * rn) const
+    {
+        return (ln->getCost() + ln->getHeur) > (rn->getCost() + rn->getHeur);   // > for min-heap
+    }
+};
 
 // A* search algorithm
+// syntax source: https://www.geeksforgeeks.org/priority-queue-in-cpp-stl/#
+// syntax source: https://www.geeksforgeeks.org/unordered_set-in-cpp-stl/
 void Solver::aStar(int (*heuristic)(const Node &, const Puzzle &))
 {
-    // FIXME
+    // thanks for the quiz question about optimal ordering of nodes to explore for efficiency
+    priority_queue<Node *, vector<Node *>, NodeComparison> frontier;
+    // maintain explored states
+    unordered_set<vector<int>> repeats;
+
+    // create a node for the initial state of the puzzle & push to queue
+    Node * startNode = new Node(puzzle.getInitial(), nullptr, 0, heuristic(puzzle.getInitial(), puzzle));
+    frontier.push(startNode);
+
+    while (!frontier.empty())
+    {
+        // keep track of maximum queue size for trace
+        if (frontier.size() > maxQueueSize)
+        {
+            maxQueueSize = frontier.size();
+        }
+
+        Node * curr = frontier.top();
+        frontier.pop();
+
+        // check if puzzle is solved
+        if (puzzle.solved(curr->getState()))
+        {
+            trace(curr);    // print trace for solution
+            return;         // and exit
+        }
+
+        // current state is NOT solution -> add to explored set
+        repeats.insert(curr->getState());
+
+        // expand nodes
+        // FIXME need to implement a child exploration function in Puzzle
+    }
+
 }
 
