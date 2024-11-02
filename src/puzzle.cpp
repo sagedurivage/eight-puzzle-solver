@@ -1,6 +1,8 @@
 
 #include "../include/puzzle.h"
 
+using namespace std;
+
 // constructinator definition
 Puzzle::Puzzle(const vector<int> & init, const vector<int> & goal)
     : init(init), goal(goal)

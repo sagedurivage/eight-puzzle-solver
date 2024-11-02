@@ -1,5 +1,8 @@
 
 #include "../include/node.h"
+#include <iostream>
+
+using namespace std;
 
 // constructinator definition
 Node::Node(const vector<int> & state, Node * parent, int cost, int heur)
@@ -35,6 +38,6 @@ void Node::printState() const
         }
         cout << endl;   // next row
     }
-    cout << endl;       // end with newline
+    // does NOT end with newline for trace syntax
 }
 
