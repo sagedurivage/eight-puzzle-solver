@@ -16,9 +16,10 @@ class Puzzle
     // constructinator
     Puzzle(const vector<int> & init, const vector<int> & goal);
     // member functorinos
-    const vector<int> & getInitial() const;     // access iniital state of puzzle
-    const vector<int> & getGoal() const;        // access goal state
-    bool solved(const vector<int> state) const; // check if goal state reached
+    const vector<int> & getInitial() const;                         // access iniital state of puzzle
+    const vector<int> & getGoal() const;                            // access goal state
+    bool solved(const vector<int> state) const;                     // check if goal state reached
+    vector<vector<int>> getLineage(const vector<int> & state) const // calculates possible successive states
 };
 
 #endif
