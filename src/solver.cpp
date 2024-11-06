@@ -38,18 +38,18 @@ void Solver::trace(Node * goal)
     // output trace
     cout << endl << "Expanding state" << endl;
     solutionPath[0]->printState();
+    cout << endl;
     // iterate through each node in the vector
     for (size_t i = 1; i < (solutionPath.size() - 1); ++i)
     {
         cout << endl << "The best state to expand with g(n) = "
              << solutionPath[i]->getCost() << " and h(n) = " 
-             << solutionPath[i]->getHeur() << " is..." << endl;
+             << solutionPath[i]->getHeur() << " is...";
         solutionPath[i]->printState();
         cout << "  Expanding this node..." << endl;
     }
     cout << endl << endl << "Goal!!!" << endl;
-    cout << endl << "To solve this problem the search algorithm expanded a total of" << endl;
-    cout << solutionPath.size() << " nodes." << endl;
+    cout << endl << "To solve this problem the search algorithm expanded a total of " << totNodesExpanded << " nodes." << endl;
     cout << "The maximum number of nodes in the queue at any one time: " << maxQueueSize << "." << endl;
     cout << "The depth of the goal node was " << solutionPath.size() - 1 << "." << endl;
 }
@@ -65,8 +65,7 @@ void Solver::attemptTrace(Node * failure)
     }
 
     cout << endl << "Impossible to solve." << endl;
-    cout << "In its attempt to solve this problem the search algorithm expanded a total of" << endl;
-    cout << attemptPath.size() << " nodes." << endl;
+    cout << "In its attempt to solve this problem the search algorithm expanded a total of" << totNodesExpanded << " nodes." << endl;
     cout << "The maximum number of nodes in the queue at any one time: " << maxQueueSize << "." << endl;
     cout << "The depth of the failure node was " << attemptPath.size() - 1 << "." << endl;
 }
@@ -130,6 +129,7 @@ void Solver::aStar(int (*heuristic)(const Node &, const Puzzle &))
             // PUT THAT CHILD ON THE FRONT LINES!!!
             frontier.push(child);
         }
+        ++ totNodesExpanded;
     }
 
     // if no goal state reached in the while loop

@@ -15,6 +15,7 @@ class Solver
   private:
     Puzzle puzzle;
     int maxQueueSize = 0;
+    int totNodesExpanded = 0;
 
     // helpful pointer funky
     // syntax citation: https://en.cppreference.com/w/cpp/language/pointer

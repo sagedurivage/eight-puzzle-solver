@@ -9,7 +9,7 @@ using namespace std;
 // get user's choice of initial puzzle
 int welcome()
 {
-    cout << endl << "Welcome to sduri001 8 puzzle solver." << endl;
+    cout << endl << "Welcome to 861285682 8 puzzle solver." << endl;
 
     int input = 0;
     while (input != 1 && input != 2)
@@ -27,11 +27,11 @@ vector<int> getPuzzle()
     vector<int> puzzle(9, 0);
     cout << "Enter your puzzle, use a zero to represent the blank" << endl;
     // get each row
-    cout << "Enter the first row, use space or tabs between numbers ";
+    cout << "Enter the first row, use space or tabs between numbers     ";
     cin >> puzzle[0] >> puzzle[1] >> puzzle[2];
-    cout << "Enter the second row, use space or tabs between numbers ";
+    cout << "Enter the second row, use space or tabs between numbers    ";
     cin >> puzzle[3] >> puzzle[4] >> puzzle[5];
-    cout << "Enter the third row, use space or tabs between numbers ";
+    cout << "Enter the third row, use space or tabs between numbers     ";
     cin >> puzzle[6] >> puzzle[7] >> puzzle[8];
     cout << endl;
 
@@ -68,6 +68,7 @@ int main()
     if (usrInput == 1)
     {
         initialPuzzle = {1, 2, 3, 4, 8, 0, 7, 6, 5};    // default puzzle
+        // initialPuzzle = {1, 0, 3, 4, 2, 6, 7, 5, 8};    // report puzzle
         // initialPuzzle = {1, 2, 3, 4, 5, 6, 7, 8, 0};    // trivial (0)
         // initialPuzzle = {1, 2, 3, 4, 5, 6, 7, 0, 8};    // very easy (1)
         // initialPuzzle = {1, 2, 0, 4, 5, 3, 7, 8, 6};    // easy (2)

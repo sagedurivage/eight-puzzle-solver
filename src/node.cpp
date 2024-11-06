@@ -25,6 +25,7 @@ void Node::printState() const
     // print out state of puzzle in a 3x3 format
     for (size_t i = 0; i < (state.size() / 3); ++i)     // rows
     {
+        cout << endl;   // next line prefix so as to not end with newline
         for (size_t j = 0; j < (state.size() / 3); ++j) // columns
         {
             if (state[(i * 3) + j] == 0)
@@ -36,7 +37,6 @@ void Node::printState() const
                 cout << state[(i * 3) + j] << " ";
             }
         }
-        cout << endl;   // next row
     }
     // does NOT end with newline for trace syntax
 }

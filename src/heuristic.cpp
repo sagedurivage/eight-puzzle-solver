@@ -18,7 +18,7 @@ int Heuristic::misplacedTile(const Node & node, const Puzzle & puzzle)
     // in goal state
     for (size_t i = 0; i < curr.size(); ++i)
     {
-        if (curr[i] != goal[0] && curr[i] != 0)
+        if (curr[i] != goal[i] && curr[i] != 0)
         {
             cnt++;
         }
